@@ -7,27 +7,15 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const username = "pvserver";
-    const password = "pvwr";
     const url = process.env.REACT_APP_SER_NR;
-    console.log(url);
 
     const fetchData = async () => {
       try {
         const response = await axios({
           method: "get",
-          url: `http://${url}/`, // Replace with the actual API endpoint
-          auth: {
-            username: username,
-            password: password,
-          },
-          withCredentials: true, // If you need to send cookies or other credentials
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
+          url: "https://controlsserver.onrender.com/api/endpoint", // Replace with the actual API endpoint
         });
-        console.log(response);
+
         const parser = new DOMParser();
         const doc = parser.parseFromString(response.data, "text/html");
         const aktuellTd = Array.from(doc.querySelectorAll("td")).find(
